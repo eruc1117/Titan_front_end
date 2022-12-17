@@ -8,7 +8,7 @@
   
 <style scoped>
     .navbar {
-        background-color: rgb(84, 84, 84);
+        background-color: rgb(251, 197, 190);
         height: 50px;
         text-align: center;
         line-height: 50px;
