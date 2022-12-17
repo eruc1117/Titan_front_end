@@ -9,7 +9,8 @@
     <input type="password">
     </div>
       <button class="loginButton">Login</button>
-    <a href="#" class="resetLink" >Forget password</a>
+    <a href="/home" class="resetLink" >Forget password</a>
+    <router-link :to="{ name: 'home' }">Test</router-link>
   </div>
 </template>
 

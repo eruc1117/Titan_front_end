@@ -10,6 +10,6 @@ import navbarVue from './components/navbar.vue';
   </header>
 
   <main>
-    <Login />
+    <router-view></router-view>
   </main>
 </template>
