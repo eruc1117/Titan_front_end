@@ -10,7 +10,8 @@
     </div>
       <button class="loginButton">Login</button>
     <a href="/home" class="resetLink" >Forget password</a>
-    <router-link :to="{ name: 'home' }">Test</router-link>
+    <router-link :to="{ name: 'home' }">Home</router-link>
+    <router-link :to="{ name: 'admin' }">Admin</router-link>
   </div>
 </template>
 
