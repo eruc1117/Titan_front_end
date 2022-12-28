@@ -1,25 +1,30 @@
 <script setup>
 import { ref } from "vue";
-
+import { useRouter } from "vue-router";
 const basicUrl = "http://localhost:3000";
 
 const account = ref("");
 const password = ref("");
-
+const router = useRouter();
 async function login() {
-  fetch(`${basicUrl}/account/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      account: account.value,
-      password: password.value,
-    }),
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      localStorage.setItem("token", response.message.token);
+  if (!("" === account.value) && !("" === password.value)) {
+    fetch(`${basicUrl}/account/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        account: account.value,
+        password: password.value,
+      }),
     })
-    .catch((error) => console.error("Error:", error));
+      .then((response) => response.json())
+      .then((response) => {
+        localStorage.setItem("token", response.message.token);
+        if (response.message.login === "true") {
+          router.push("/home");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }
 }
 </script>
 
@@ -43,8 +48,6 @@ async function login() {
     </div>
     <button class="loginButton" @click="login">Login</button>
     <a href="/home" class="resetLink">Forget password</a>
-    <router-link :to="{ name: 'home' }">Home</router-link>
-    <router-link :to="{ name: 'admin' }">Admin</router-link>
   </div>
 </template>
 
