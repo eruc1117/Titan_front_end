@@ -20,7 +20,11 @@ async function login() {
       .then((response) => {
         localStorage.setItem("token", response.message.token);
         if (response.message.login === "true") {
-          router.push("/home");
+          if (response.message.admin !== 1) {
+            router.push("/home");
+          } else if (response.message.admin === 1) {
+            router.push("/admin");
+          }
         }
       })
       .catch((error) => console.error("Error:", error));
