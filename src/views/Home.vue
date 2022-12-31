@@ -5,23 +5,29 @@ import { useGeolocation } from "@vueuse/core";
 const { coords, locatedAt, error, resume, pause } = useGeolocation();
 const basicUrl = "http://localhost:3000";
 const jwtToken = localStorage.getItem("token");
+const userId = localStorage.getItem("userId");
 const startTime = ref("--:--:--");
 const endTime = ref("--:--:--");
 let qrCodeUrl = "";
-const userId = ref("");
 const qrcodeValue = ref(`${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${1}`);
 async function preQrcode() {
-  fetch(`${basicUrl}/checkIn/preQrCode/${1}`, {
-    method: "GET",
+  fetch(`${basicUrl}/checkIn/preQrCode`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${jwtToken}`,
     },
+    body: JSON.stringify({
+      location: {
+        latitude: coords.value.latitude,
+        longitude: coords.value.longitude,
+      },
+    }),
   })
     .then((response) => response.json())
     .then((response) => {
       qrCodeUrl = response.message.urlVerCode;
-      qrcodeValue.value = `${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${1}`;
+      qrcodeValue.value = `${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${userId}`;
     })
     .catch((error) => console.error("Error:", error));
 }

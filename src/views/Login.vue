@@ -19,6 +19,7 @@ async function login() {
       .then((response) => response.json())
       .then((response) => {
         localStorage.setItem("token", response.message.token);
+        localStorage.setItem("userId", response.message.userId);
         if (response.message.login === "true") {
           if (response.message.admin !== 1) {
             router.push("/home");
