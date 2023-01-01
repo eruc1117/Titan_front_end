@@ -68,6 +68,7 @@ async function checkIn() {
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
+  localStorage.removeItem("routerAuth");
   router.push("/");
 }
 </script>

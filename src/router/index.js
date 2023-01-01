@@ -16,6 +16,43 @@ const router = createRouter({
       path: "/home",
       name: "home",
       component: Home,
+      meta: { requiresAuth: true },
+      beforeEnter: async (to, from, next) => {
+        try {
+          let isRouterAuth = localStorage.getItem("routerAuth");
+          if (!isRouterAuth) {
+            let authRes = await routerAuth();
+            localStorage.setItem("routerAuth", authRes === "success");
+          }
+          if (isRouterAuth === "true") {
+            next();
+          } else {
+            next({ name: "login" });
+          }
+        } catch (err) {
+          console.log(err);
+        }
+        async function routerAuth() {
+          try {
+            const basicUrl = "http://localhost:3000";
+            const jwtToken = localStorage.getItem("token");
+            let routerAuthRes = await fetch(
+              `${basicUrl}/account/froontEndRouter`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${jwtToken}`,
+                },
+              }
+            );
+            routerAuthRes = await routerAuthRes.json();
+            return routerAuthRes.message;
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      },
     },
     {
       path: "/admin",
