@@ -22,11 +22,14 @@ const router = createRouter({
           let isRouterAuth = localStorage.getItem("routerAuth");
           if (!isRouterAuth) {
             let authRes = await routerAuth();
-            localStorage.setItem("routerAuth", authRes === "success");
+            localStorage.setItem("routerAuth", authRes);
+            console.log(authRes);
+            isRouterAuth = authRes;
           }
-          if (isRouterAuth === "true") {
+          if (isRouterAuth === "success") {
             next();
           } else {
+            localStorage.removeItem("routerAuth");
             next({ name: "login" });
           }
         } catch (err) {

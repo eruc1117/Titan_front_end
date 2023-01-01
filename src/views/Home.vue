@@ -46,20 +46,22 @@ async function checkIn() {
         Authorization: `Bearer ${jwtToken}`,
       },
       body: JSON.stringify({
-        userId: 1,
+        userId: userId,
         location: {
           latitude: coords.value.latitude,
           longitude: coords.value.longitude,
         },
       }),
     });
-    if (response.startTime !== "Invalid date") {
-      startTime.value = response.startTime.split(" ")[1];
+    checkInRes = await checkInRes.json();
+    if (checkInRes.status === 200) {
+      if (checkInRes.startTime !== "Invalid date") {
+        startTime.value = checkInRes.startTime.split(" ")[1];
+      }
+      if (checkInRes.endTime !== "Invalid date") {
+        endTime.value = checkInRes.endTime.split(" ")[1];
+      }
     }
-    if (response.endTime !== "Invalid date") {
-      endTime.value = response.endTime.split(" ")[1];
-    }
-    checkInRes = checkInRes.json();
   } catch (err) {
     console.log(err);
   }
