@@ -52,7 +52,7 @@ async function login() {
       />
     </div>
     <button class="loginButton" @click="login">Login</button>
-    <a href="/home" class="resetLink">Forget password</a>
+    <a href="/resetPassword" class="resetLink">Forget password</a>
   </div>
 </template>
 
