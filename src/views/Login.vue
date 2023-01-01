@@ -7,28 +7,29 @@ const account = ref("");
 const password = ref("");
 const router = useRouter();
 async function login() {
-  if (!("" === account.value) && !("" === password.value)) {
-    fetch(`${basicUrl}/account/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        account: account.value,
-        password: password.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        localStorage.setItem("token", response.message.token);
-        localStorage.setItem("userId", response.message.userId);
-        if (response.message.login === "true") {
-          if (response.message.admin !== 1) {
-            router.push("/home");
-          } else if (response.message.admin === 1) {
-            router.push("/admin");
-          }
+  try {
+    if (!("" === account.value) && !("" === password.value)) {
+      let loginRes = await fetch(`${basicUrl}/account/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          account: account.value,
+          password: password.value,
+        }),
+      });
+      loginRes = await loginRes.json();
+      localStorage.setItem("token", loginRes.message.token);
+      localStorage.setItem("userId", loginRes.message.userId);
+      if (loginRes.message.login === "true") {
+        if (loginRes.message.admin !== 1) {
+          router.push("/home");
+        } else if (loginRes.message.admin === 1) {
+          router.push("/admin");
         }
-      })
-      .catch((error) => console.error("Error:", error));
+      }
+    }
+  } catch (err) {
+    console.log(err);
   }
 }
 </script>
