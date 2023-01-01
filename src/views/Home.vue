@@ -28,10 +28,13 @@ async function preQrcode() {
         },
       }),
     });
-    preQrCodeRes = preQrCodeRes.json();
-    qrCodeUrl = response.message.urlVerCode;
-    qrcodeValue.value = `${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${userId}`;
-    qrSwitch.value = !qrSwitch.value;
+    preQrCodeRes = await preQrCodeRes.json();
+    console.log(preQrCodeRes);
+    if (preQrCodeRes.status === 200) {
+      qrCodeUrl = response.preQrCodeRes;
+      qrcodeValue.value = `${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${userId}`;
+      qrSwitch.value = !qrSwitch.value;
+    }
   } catch (err) {
     console.log(err);
   }
