@@ -1,3 +1,3 @@
-module.exports = {
-  publicPath: "/Titan_front_end/",
-};
+export default defineConfig({
+  publicPath: "./Titan_front_end/",
+});
