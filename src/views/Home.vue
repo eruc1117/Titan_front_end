@@ -29,7 +29,6 @@ async function preQrcode() {
       }),
     });
     preQrCodeRes = await preQrCodeRes.json();
-    console.log(preQrCodeRes);
     if (preQrCodeRes.status === 200) {
       qrCodeUrl = preQrCodeRes.message;
       qrcodeValue.value = `${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${userId}`;
@@ -56,7 +55,6 @@ async function checkIn() {
         },
       }),
     });
-    console.log(checkInRes);
     checkInRes = await checkInRes.json();
     if (checkInRes.status === 200) {
       if (checkInRes.startTime !== "Invalid date") {
