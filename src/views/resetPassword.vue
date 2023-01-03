@@ -1,8 +1,7 @@
 <script setup>
-import { baseCompile } from "@vue/compiler-core";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-const basicUrl = "http://localhost:3000";
+const basicUrl = "https://eruc-titan-back.herokuapp.com/";
 const userId = ref("");
 const password = ref("");
 const repeatPassword = ref("");

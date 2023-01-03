@@ -5,7 +5,7 @@ import { useGeolocation } from "@vueuse/core";
 import { useRouter } from "vue-router";
 const { coords } = useGeolocation();
 const router = useRouter();
-const basicUrl = "http://localhost:3000";
+const basicUrl = "https://eruc-titan-back.herokuapp.com";
 const jwtToken = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
 const startTime = ref("--:--:--");
@@ -41,6 +41,11 @@ async function preQrcode() {
 
 async function checkIn() {
   try {
+    let latitude = coords.value.latitude;
+    let longitude = coords.value.longitude;
+    if (!isFinite(latitude) || !isFinite(longitude)) {
+      throw new Error("Wait !");
+    }
     let checkInRes = await fetch(`${basicUrl}/checkIn/check`, {
       method: "POST",
       headers: {
@@ -56,6 +61,7 @@ async function checkIn() {
       }),
     });
     checkInRes = await checkInRes.json();
+    console.log(checkInRes);
     if (checkInRes.status === 200) {
       if (checkInRes.startTime !== "Invalid date") {
         startTime.value = checkInRes.startTime.split(" ")[1];

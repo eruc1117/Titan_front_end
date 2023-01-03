@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-const basicUrl = "http://localhost:3000";
+const basicUrl = "https://eruc-titan-back.herokuapp.com";
 
 const account = ref("");
 const password = ref("");
@@ -18,6 +18,7 @@ async function login() {
         }),
       });
       loginRes = await loginRes.json();
+      console.log(loginRes);
       localStorage.setItem("token", loginRes.message.token);
       localStorage.setItem("userId", loginRes.message.userId);
       if (loginRes.message.login === "true") {
