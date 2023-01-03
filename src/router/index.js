@@ -23,7 +23,6 @@ const router = createRouter({
           if (!isRouterAuth) {
             let authRes = await routerAuth();
             localStorage.setItem("routerAuth", authRes);
-            console.log(authRes);
             isRouterAuth = authRes;
           }
           if (isRouterAuth === "success") {

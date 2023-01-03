@@ -18,7 +18,6 @@ async function login() {
         }),
       });
       loginRes = await loginRes.json();
-      console.log(loginRes);
       localStorage.setItem("token", loginRes.message.token);
       localStorage.setItem("userId", loginRes.message.userId);
       if (loginRes.message.login === "true") {
