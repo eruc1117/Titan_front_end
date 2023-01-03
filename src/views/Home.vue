@@ -61,7 +61,6 @@ async function checkIn() {
       }),
     });
     checkInRes = await checkInRes.json();
-    console.log(checkInRes);
     if (checkInRes.status === 200) {
       if (checkInRes.startTime !== "Invalid date") {
         startTime.value = checkInRes.startTime.split(" ")[1];
