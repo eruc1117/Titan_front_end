@@ -36,7 +36,7 @@ const router = createRouter({
         }
         async function routerAuth() {
           try {
-            const basicUrl = "http://localhost:3000";
+            const basicUrl = "https://eruc-titan-back.herokuapp.com";
             const jwtToken = localStorage.getItem("token");
             let routerAuthRes = await fetch(
               `${basicUrl}/account/froontEndRouter`,
