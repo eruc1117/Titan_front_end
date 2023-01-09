@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-const basicUrl = "https://eruc-titan-back.herokuapp.com";
+const basicUrl = "http://localhost:3000/";
 const absentAry = ref([]);
 const jwtToken = localStorage.getItem("token");
 const inputDate = ref("");

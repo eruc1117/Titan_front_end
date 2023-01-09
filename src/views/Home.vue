@@ -5,7 +5,7 @@ import { useGeolocation } from "@vueuse/core";
 import { useRouter } from "vue-router";
 const { coords } = useGeolocation();
 const router = useRouter();
-const basicUrl = "https://eruc-titan-back.herokuapp.com";
+const basicUrl = "http://localhost:3000/";
 const jwtToken = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
 const startTime = ref("--:--:--");
