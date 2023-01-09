@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-const basicUrl = "http://localhost:3000/";
+const basicUrl = "http://localhost:3000";
 
 const account = ref("");
 const password = ref("");

@@ -36,7 +36,7 @@ const router = createRouter({
         }
         async function routerAuth() {
           try {
-            const basicUrl = "http://localhost:3000/";
+            const basicUrl = "http://localhost:3000";
             const jwtToken = localStorage.getItem("token");
             let routerAuthRes = await fetch(
               `${basicUrl}/account/froontEndRouter`,

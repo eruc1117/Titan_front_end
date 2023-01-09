@@ -5,14 +5,14 @@ import { useGeolocation } from "@vueuse/core";
 import { useRouter } from "vue-router";
 const { coords } = useGeolocation();
 const router = useRouter();
-const basicUrl = "http://localhost:3000/";
+const basicUrl = "http://localhost:3000";
 const jwtToken = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
 const startTime = ref("--:--:--");
 const endTime = ref("--:--:--");
 const qrSwitch = ref(false);
 let qrCodeUrl = "";
-const qrcodeValue = ref(`${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${1}`);
+const qrcodeValue = ref(`${basicUrl}/checkIn/qrCode/${qrCodeUrl}/${userId}`);
 async function preQrcode() {
   try {
     let preQrCodeRes = await fetch(`${basicUrl}/checkIn/preQrCode`, {
@@ -43,6 +43,8 @@ async function checkIn() {
   try {
     let latitude = coords.value.latitude;
     let longitude = coords.value.longitude;
+    console.log("latitude ===>" + latitude);
+    console.log("longitude ===>" + longitude);
     if (!isFinite(latitude) || !isFinite(longitude)) {
       throw new Error("Wait !");
     }
